@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Image map types</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 750px;
+		max-height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+    <link rel="stylesheet" href="css/chosen.min.css">
+  </head>
+  <body>
+    <div id="map"></div>
+    <h2>Update Pallete</h2>
+    <select data-placeholder="Select the monsters..." class="chosen-select" multiple tabindex="3" id="monster-list">
+        <option value=""></option>
+    </select>
+    <button class="update-pallete">Update Pallete</button>
+    <h2>Pallete</h2>
+    <div class="pallete"></div>
+    <h2>Selected</h2>
+    <div class="pallete-selected"></div>
+    <script>
+        var map = false;
+		var markersData = [];
+		function getMapFolder()
+		{
+			if( map.getMapTypeId() == 'Ground' ) return 'floor-07-map';
+			else if( map.getMapTypeId() == '+1' ) return 'floor-06-map';
+			else if( map.getMapTypeId() == '+2' ) return 'floor-05-map';
+			else if( map.getMapTypeId() == '+3' ) return 'floor-04-map';
+			else if( map.getMapTypeId() == '+4' ) return 'floor-03-map';
+			else if( map.getMapTypeId() == '+5' ) return 'floor-02-map';
+			else if( map.getMapTypeId() == '+6' ) return 'floor-01-map';
+			else if( map.getMapTypeId() == '+7' ) return 'floor-00-map';
+			else if( map.getMapTypeId() == '-1' ) return 'floor-08-map';
+			else if( map.getMapTypeId() == '-2' ) return 'floor-09-map';
+			else if( map.getMapTypeId() == '-3' ) return 'floor-10-map';
+			else if( map.getMapTypeId() == '-4' ) return 'floor-11-map';
+			else if( map.getMapTypeId() == '-5' ) return 'floor-12-map';
+			else if( map.getMapTypeId() == '-6' ) return 'floor-13-map';
+			else if( map.getMapTypeId() == '-7' ) return 'floor-14-map';
+			else if( map.getMapTypeId() == '-8' ) return 'floor-15-map';
+		}
+		function getTileURL(coord, zoom) {
+              var normalizedCoord = getNormalizedCoord(coord, zoom);
+              if (!normalizedCoord) {
+                return null;
+              }
+              var bound = Math.pow(2, zoom);
+			  $.each( markersData, function(key, value) {   
+                            if( value.type ==  map.getMapTypeId() )
+                            {
+                                markersData[key].object.setMap(map);
+                            }
+							else
+							{
+								markersData[key].object.setMap(null);
+							}
+                        });
+              return 'data/maptiles/'+getMapFolder()+'/' + zoom + '/' + normalizedCoord.x + '/' + (bound - normalizedCoord.y - 1) + '.png';
+          }
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          center: {lat: 0, lng: 0},
+          zoom: 3,
+          streetViewControl: false,
+          mapTypeControlOptions: {
+            mapTypeIds: ['-8','-7','-6','-5','-4','-3','-2','-1', 'Ground', '+1', '+2', '+3', '+4', '+5', '+6', '+7']
+          }
+        });
+        var s8MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-8'
+        });
+        var s7MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-7'
+        });
+        var s6MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-6'
+        });
+        var s5MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-5'
+        });
+        var s4MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-4'
+        });
+        var s3MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-3'
+        });
+        var s2MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-2'
+        });
+        var s1MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '-1'
+        });
+        var g0MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: 'Ground'
+        });
+        var g1MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+1'
+        });
+        var g2MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+2'
+        });
+        var g3MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+3'
+        });
+        var g4MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+4'
+        });
+        var g5MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+5'
+        });
+        var g6MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+6'
+        });
+        var g7MapType = new google.maps.ImageMapType({
+          getTileUrl: getTileURL,
+          tileSize: new google.maps.Size(256, 256),
+          maxZoom: 6,
+          minZoom: 0,
+          radius: 1738000,
+          name: '+7'
+        });
+        map.mapTypes.set('-8', s8MapType);
+        map.mapTypes.set('-7', s7MapType);
+        map.mapTypes.set('-6', s6MapType);
+        map.mapTypes.set('-5', s5MapType);
+        map.mapTypes.set('-4', s4MapType);
+        map.mapTypes.set('-3', s3MapType);
+        map.mapTypes.set('-2', s2MapType);
+        map.mapTypes.set('-1', s1MapType);
+        map.mapTypes.set('Ground', g0MapType);
+        map.mapTypes.set('+1', g1MapType);
+        map.mapTypes.set('+2', g2MapType);
+        map.mapTypes.set('+3', g3MapType);
+        map.mapTypes.set('+4', g4MapType);
+        map.mapTypes.set('+5', g5MapType);
+        map.mapTypes.set('+6', g6MapType);
+        map.mapTypes.set('+7', g7MapType);
+        map.setMapTypeId('Ground');
+        google.maps.event.addListener(map, 'click', function(event) {
+            addMarker(event.latLng, map);
+        });
+      }
+
+      // Normalizes the coords that tiles repeat across the x axis (horizontally)
+      // like the standard Google map tiles.
+      function getNormalizedCoord(coord, zoom) {
+        var y = coord.y;
+        var x = coord.x;
+
+        // tile range in one direction range is dependent on zoom level
+        // 0 = 1 tile, 1 = 2 tiles, 2 = 4 tiles, 3 = 8 tiles, etc
+        var tileRange = 1 << zoom;
+
+        // don't repeat across y-axis (vertically)
+        if (y < 0 || y >= tileRange) {
+          return null;
+        }
+
+        // repeat across x-axis
+        if (x < 0 || x >= tileRange) {
+          x = (x % tileRange + tileRange) % tileRange;
+        }
+
+        return {x: x, y: y};
+      }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmdT84uHZH757h6j2Wqs5Ah1Twfs8sBmw&callback=initMap">
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.js" type="text/javascript"></script>
+    <script src="js/chosen.jquery.min.js" type="text/javascript"></script>
+    <script src="data/monsters.js" type="text/javascript"></script>
+    <script>
+        function addMarker(location, map) {
+            // Add the marker at the clicked location, and add the next-available label
+            // from the array of alphabetical characters.
+            var image = $('.pallete-selected').attr( 'data-image' );
+            var label = $('.pallete-selected').attr( 'data-name' );
+            var marker = new google.maps.Marker({
+              position: location,
+              //label: label,
+              icon: image,
+              map: map
+            });
+			markersData.push({ type: map.getMapTypeId(), position: {lat: location.lat(), lng: location.lng()}, label: label, icon: image, object: marker });
+        }
+        $(document).ready(function(){
+            $.each( monsters, function(key, value) {
+                if( value.image )
+                {
+                    $('#monster-list')
+                        .append($("<option></option>")
+                                   .attr("value",value.name)
+                                   .text(value.name)); 
+                }
+            });
+            $(".chosen-select").chosen({disable_search_threshold: 10});
+            $('.update-pallete').on( 'click', function(event){
+                    event.preventDefault();
+                    $('.pallete').html('');
+                    $( "#monster-list option:selected" ).each(function(){
+                        var optionVal = $(this).val();
+                        console.log( $(this).val() );
+                        $.each( monsters, function(key, value) {   
+                            if( value.name ==  optionVal )
+                            {
+                                $('.pallete').append($("<button class=\"pallete-item\" data-name=\"" + value.name + "\"><img src=\""+ 'data/monster_images/' + value.image +"\"></button>") );
+                            }
+                        });
+                    });
+                    $('.pallete-item').on( 'click', function(event){
+                        $('.pallete-selected').html('');
+                        $('.pallete-selected').attr( 'data-name', $(this).attr('data-name') );
+                        $('.pallete-selected').attr( 'data-image', $(this).find('img').attr('src') );
+                        $(this).find('img').clone().appendTo( ".pallete-selected" );
+                    });
+            });
+        });
+		function exportMarkers()
+		{
+			var exportData = [];
+			$.each( markersData, function(key, value) {   
+				exportData.push({ type: value.type, position: value.position, label: value.label, icon: value.icon });
+
+			});
+			console.log(JSON.stringify(exportData));
+		}
+		function importMarkers( importData )
+		{
+			$.each( markersData, function(key, value) {   
+				markersData[key].object.setMap(null);
+
+			});
+			markersData = [];
+			$.each( importData, function(key, value) {   
+                            if( value.type ==  map.getMapTypeId() )
+                            {
+								var marker = new google.maps.Marker({
+								  position: value.position,
+								  //label: label,
+								  icon: value.icon,
+								  map: map
+								});
+                            }
+							else
+							{
+								var marker = new google.maps.Marker({
+								  position: value.position,
+								  //label: label,
+								  icon: value.icon,
+								  map: null
+								});
+							}
+							markersData.push({ type: value.type, position: value.position, label: value.label, icon: value.icon, object: marker });
+                        });
+		}
+		// map.getCenter().lat()
+		// map.getCenter().lng()
+		//  map.setCenter({lat:43.32517767999296, lng:93.1640625});
+		// map.getZoom()
+    </script>
+  </body>
+</html>
