@@ -138,3 +138,30 @@ function importMarkers()
     if( typeof importData.zoom != 'undefined' )
         map.setZoom(importData.zoom);
 }
+
+var heatmap = null;
+function heatMap()
+{
+    if(heatmap)
+        heatmap.setMap(null);
+    if( $('#heatmap-toggle').attr('data-active') == 'on' )
+    {
+        $('#heatmap-toggle').attr('data-active', 'off');
+        $('#heatmap-toggle').html('Heatmap is off');
+    }
+    else
+    {
+        $('#heatmap-toggle').attr('data-active', 'on');
+        $('#heatmap-toggle').html('Heatmap is on');
+        var heatMapData = [];
+        $.each(markersData, function (key, value) {
+            if (value.type == map.getMapTypeId())
+                heatMapData.push({location: new google.maps.LatLng(value.position.lat, value.position.lng), weight: 2});
+        });
+        heatmap = new google.maps.visualization.HeatmapLayer({
+          data: heatMapData,
+          radius: 35
+        });
+        heatmap.setMap(map);
+    }
+}

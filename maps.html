@@ -20,7 +20,7 @@
             <div class="row">
                 <div class="col-sm-4">
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingOne">
+                            <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
                                     <a role="button" data-toggle="collapse" data-parent="#accordion" href="#palleteArea">
                                         Pallete
@@ -42,7 +42,21 @@
                             </div>
                         </div>
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingTwo">
+                            <div class="panel-heading" role="tab">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#toolsArea">
+                                        Tools
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="toolsArea" class="panel-collapse collapse in" role="tabpanel">
+                                <div class="panel-body">
+                                    <button onclick="heatMap();" class="form-control" id="heatmap-toggle" data-active="no">Heatmap is off</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#exportArea">
                                         Export
@@ -58,7 +72,7 @@
                             </div>
                         </div>
                         <div class="panel panel-default">
-                            <div class="panel-heading" role="tab" id="headingThree">
+                            <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#importArea">
                                         Import
@@ -87,7 +101,7 @@
         <script src="data/monsters.js" type="text/javascript"></script>
         <script src="js/editor.js" type="text/javascript"></script>
         <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmdT84uHZH757h6j2Wqs5Ah1Twfs8sBmw&callback=initMap">
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmdT84uHZH757h6j2Wqs5Ah1Twfs8sBmw&callback=initMap&libraries=visualization">
         </script>
     </body>
 </html>
