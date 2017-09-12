@@ -51,7 +51,8 @@
                             </div>
                             <div id="exportArea" class="panel-collapse collapse in" role="tabpanel">
                                 <div class="panel-body">
-                                    <button onclick="exportMarkers();" class="form-control">Export</button>
+                                    <input type="text" class="form-control" id="export-title" placeholder="title">
+                                    <button onclick="exportMarkers();" class="form-control export-button">Export</button>
                                     <textarea class="export-result form-control hidden"></textarea>
                                 </div>
                             </div>
@@ -82,11 +83,11 @@
         <script src="js/jquery.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
         <script src="js/initMap.js" type="text/javascript"></script>
-        <script async defer
-                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmdT84uHZH757h6j2Wqs5Ah1Twfs8sBmw&callback=initMap">
-        </script>
         <script src="js/chosen.jquery.min.js" type="text/javascript"></script>
         <script src="data/monsters.js" type="text/javascript"></script>
         <script src="js/editor.js" type="text/javascript"></script>
+        <script async defer
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmdT84uHZH757h6j2Wqs5Ah1Twfs8sBmw&callback=initMap">
+        </script>
     </body>
 </html>

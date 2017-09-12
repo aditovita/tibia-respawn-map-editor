@@ -229,7 +229,7 @@ function initMap() {
     map.mapTypes.set('+7', g7MapType);
     map.setMapTypeId('Ground');
     google.maps.event.addListener(map, 'click', function (event) {
-        addMarker(event.latLng, map);
+        MapEditor.addMarker(event.latLng, map);
     });
 }
 
