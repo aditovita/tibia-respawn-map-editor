@@ -2765,7 +2765,7 @@ var monsters = [{
         "energy": "105",
         "earth": "0",
         "death": "90",
-        "image": null
+        "image": "Devourer_(Criatura).gif"
     }, {
         "name": "Devovorga",
         "rank": "Boss",
