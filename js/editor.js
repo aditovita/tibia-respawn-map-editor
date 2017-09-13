@@ -63,7 +63,7 @@ var MapEditor = {
             contentString += "<div>Holy: " + currentMonster.holy + "</div>";
             contentString += "<div>Ice: " + currentMonster.ice + "</div>";
             contentString += "<div>Physical: " + currentMonster.physical + "</div>";
-            contentString += "<div>Average Loot: " + currentMonster.average_loot + "</div>";
+            contentString += "<div>Average Loot: " + currentMonster.loot_value + "</div>";
             contentString += "<button onclick=\"removeMarker('" +marker.editor_id + "')\">Remove Marker</button>";
             var infowindow = new google.maps.InfoWindow({
               content: contentString
