@@ -66,6 +66,8 @@
                             <div id="exportArea" class="panel-collapse collapse in" role="tabpanel">
                                 <div class="panel-body">
                                     <input type="text" class="form-control" id="export-title" placeholder="title">
+                                    <label for="export-description">Description</label>
+                                    <textarea id="export-description" class="form-control"></textarea>
                                     <button onclick="exportMarkers();" class="form-control export-button">Export</button>
                                     <textarea class="export-result form-control hidden"></textarea>
                                 </div>
@@ -88,9 +90,29 @@
                                 </div>
                             </div>
                         </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab">
+                                <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#huntingArea">
+                                        Hunting List
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="huntingArea" class="panel-collapse collapse in" role="tabpanel">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <ul>
+                                            <li><a href="#" data-file="data/hunts/test.js" class="import-link">Test</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                 </div>
                 <div class="col-sm-8">
                     <div id="map"></div>
+                    <h2 id="hunt-title"></h2>
+                    <div id="hunt-description"></div>
                 </div>
             </div>
         </div>

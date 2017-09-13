@@ -116,6 +116,12 @@ $(document).ready(function () {
             $(this).find('img').clone().appendTo(".pallete-selected");
         });
     });
+    $('.import-link').on('click', function (event) {
+        event.preventDefault();
+        var script = document.createElement('script');
+        script.src = $(this).attr('data-file');
+        document.body.appendChild(script);
+    });
 });
 function exportMarkers()
 {
@@ -124,6 +130,7 @@ function exportMarkers()
         exportData.push({type: value.type, position: value.position, label: value.label, icon: value.icon});
     });
     var exportTitle = $('#export-title').val();
+    var exportDescription = $('#export-description').val();
     if( exportTitle == '' )
         exportTitle = 'Test';
     var palleteItems = new Array();
@@ -131,6 +138,7 @@ function exportMarkers()
         palleteItems.push(MapPallete.pallete[x].name);
     var exportResult = {
         name: exportTitle,
+        description: exportDescription,
         markers: exportData,
         zoom: map.getZoom(),
         center: {lat: map.getCenter().lat(), lng: map.getCenter().lng()},
@@ -140,9 +148,10 @@ function exportMarkers()
     $('.export-result').val(JSON.stringify(exportResult));
     $('.export-result').removeClass('hidden');
 }
-function importMarkers()
+function importMarkers( importData )
 {
-    var importData = JSON.parse($('#import-data').val());
+    if(typeof importData == 'undefined')
+        importData = JSON.parse($('#import-data').val());
     $.each(markersData, function (key, value) {
         markersData[key].object.setMap(null);
 
@@ -163,9 +172,15 @@ function importMarkers()
         map.setCenter(importData.center);
     if( typeof importData.zoom != 'undefined' )
         map.setZoom(importData.zoom);
-    
-    $('#monster-list').val(importData.pallete).trigger('chosen:updated');
-    $('.update-pallete').click();
+    if( typeof importData.name != 'undefined' )
+        $('#hunt-title').html(importData.name);
+    if( typeof importData.description != 'undefined' )
+        $('#hunt-description').html(importData.description);
+    if( typeof importData.pallete != 'undefined' )
+    {
+        $('#monster-list').val(importData.pallete).trigger('chosen:updated');
+        $('.update-pallete').click();
+    }
 }
 
 function removeMarker( marker_id )
