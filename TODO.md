@@ -1,8 +1,7 @@
 TODO
 --------------
 
-* Add description field to export/import, show description below map after import
-* Add initial hunting places bundle and a load feature
+* Add initial hunting places bundle
 * Add generic symbols to pallete
 * Change tools to settings, implement heatmap control as checkbox, add heatmap radius control. Add "show markers" controls.
 
