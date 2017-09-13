@@ -41,7 +41,13 @@ var MapEditor = {
             imagePath =  MapPallete.selected.image;
         if( typeof mapType == "undefined")
             mapType =  map.getMapTypeId();
-		var marker = new google.maps.Marker( { position: location, icon: imagePath, map: map } );
+        var icon = {
+            url: imagePath,
+            scaledSize: new google.maps.Size(32, 32), // scaled size
+            origin: new google.maps.Point(0,0), // origin
+            anchor: new google.maps.Point(16, 16) // anchor
+        };
+		var marker = new google.maps.Marker( { position: location, icon: icon, map: map } );
         marker.editor_id = new Date().getTime() + '_' + Math.random().toString(36).substr(2, 10);
         marker.monster_name = name;
 		markersData.push({
@@ -145,10 +151,10 @@ function importMarkers()
     $.each(importData.markers, function (key, value) {
         if (value.type == map.getMapTypeId())
         {
-            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), map, value.name, value.icon, value.type);
+            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), map, value.label, value.icon, value.type);
         } else
         {
-            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), null, value.name, value.icon, value.type);
+            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), null, value.label, value.icon, value.type);
         }
     });
     if( typeof importData.type != 'undefined' )
