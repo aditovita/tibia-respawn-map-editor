@@ -34,14 +34,29 @@ var MapPallete = {
 }
 
 var MapEditor = {
-	addMarker: function (location, map) {
-		var marker = new google.maps.Marker( { position: location, icon: MapPallete.selected.image, map: map } );
+	addMarker: function (location, map, name, imagePath, mapType) {
+        if( typeof name == "undefined")
+            name =  MapPallete.selected.name;
+        if( typeof imagePath == "undefined")
+            imagePath =  MapPallete.selected.image;
+        if( typeof mapType == "undefined")
+            mapType =  map.getMapTypeId();
+		var marker = new google.maps.Marker( { position: location, icon: imagePath, map: map } );
+        marker.editor_id = new Date().getTime() + '_' + Math.random().toString(36).substr(2, 10);
+        marker.monster_name = name;
 		markersData.push({
-            type: map.getMapTypeId(),
+            type: mapType,
             position: {lat: location.lat(),lng: location.lng()},
-            label: MapPallete.selected.name,
-            icon: MapPallete.selected.image,
+            label: name,
+            icon: imagePath,
             object: marker
+        });
+        marker.addListener('click', function() {
+            var contentString = "<button onclick=\"removeMarker('" +marker.editor_id + "')\">Remove Marker</button>";
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString
+            });
+           infowindow.open(map, marker);
         });
 	},
     init: function()
@@ -114,22 +129,11 @@ function importMarkers()
     $.each(importData.markers, function (key, value) {
         if (value.type == map.getMapTypeId())
         {
-            var marker = new google.maps.Marker({
-                position: value.position,
-                //label: label,
-                icon: value.icon,
-                map: map
-            });
+            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), map, value.name, value.icon, value.type);
         } else
         {
-            var marker = new google.maps.Marker({
-                position: value.position,
-                //label: label,
-                icon: value.icon,
-                map: null
-            });
+            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), null, value.name, value.icon, value.type);
         }
-        markersData.push({type: value.type, position: value.position, label: value.label, icon: value.icon, object: marker});
     });
     if( typeof importData.type != 'undefined' )
         map.setMapTypeId(importData.type);
@@ -137,6 +141,18 @@ function importMarkers()
         map.setCenter(importData.center);
     if( typeof importData.zoom != 'undefined' )
         map.setZoom(importData.zoom);
+}
+
+function removeMarker( marker_id )
+{
+    for(var x in markersData)
+    {
+        if( markersData[x].object.editor_id == marker_id )
+        {
+            markersData[x].object.setMap(null);
+            markersData.splice(x, 1);
+        }
+    }
 }
 
 var heatmap = null;
