@@ -120,12 +120,16 @@ function exportMarkers()
     var exportTitle = $('#export-title').val();
     if( exportTitle == '' )
         exportTitle = 'Test';
+    var palleteItems = new Array();
+    for( var x in MapPallete.pallete )
+        palleteItems.push(MapPallete.pallete[x].name);
     var exportResult = {
         name: exportTitle,
         markers: exportData,
         zoom: map.getZoom(),
         center: {lat: map.getCenter().lat(), lng: map.getCenter().lng()},
-        type: map.getMapTypeId()
+        type: map.getMapTypeId(),
+        pallete: palleteItems
     };
     $('.export-result').val(JSON.stringify(exportResult));
     $('.export-result').removeClass('hidden');
@@ -153,6 +157,9 @@ function importMarkers()
         map.setCenter(importData.center);
     if( typeof importData.zoom != 'undefined' )
         map.setZoom(importData.zoom);
+    
+    $('#monster-list').val(importData.pallete).trigger('chosen:updated');
+    $('.update-pallete').click();
 }
 
 function removeMarker( marker_id )
