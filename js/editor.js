@@ -52,7 +52,19 @@ var MapEditor = {
             object: marker
         });
         marker.addListener('click', function() {
-            var contentString = "<button onclick=\"removeMarker('" +marker.editor_id + "')\">Remove Marker</button>";
+            var currentMonster = MonsterDB.get(marker.monster_name);
+            var contentString = currentMonster.name;
+            contentString += "<div>HP: " + currentMonster.hp + "</div>";
+            contentString += "<div>XP: " + currentMonster.exp + "</div>";
+            contentString += "<div>Death: " + currentMonster.death + "</div>";
+            contentString += "<div>Earth: " + currentMonster.earth + "</div>";
+            contentString += "<div>Energy: " + currentMonster.energy + "</div>";
+            contentString += "<div>Fire: " + currentMonster.fire + "</div>";
+            contentString += "<div>Holy: " + currentMonster.holy + "</div>";
+            contentString += "<div>Ice: " + currentMonster.ice + "</div>";
+            contentString += "<div>Physical: " + currentMonster.physical + "</div>";
+            contentString += "<div>Average Loot: " + currentMonster.average_loot + "</div>";
+            contentString += "<button onclick=\"removeMarker('" +marker.editor_id + "')\">Remove Marker</button>";
             var infowindow = new google.maps.InfoWindow({
               content: contentString
             });
