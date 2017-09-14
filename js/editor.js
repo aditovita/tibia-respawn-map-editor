@@ -28,6 +28,18 @@ var MonsterDB = {
 	},
 }
 
+var ImageDB = {
+    get: function( name )
+    {
+        var monster = MonsterDB.get(name);
+        if( typeof monster != 'undefined' )
+        {
+            return monster.image;
+        }
+        return false;
+    }
+}
+
 var MapPallete = {
 	selected: false,
     pallete: new Array()
@@ -126,7 +138,7 @@ function exportMarkers()
 {
     var exportData = [];
     $.each(markersData, function (key, value) {
-        exportData.push({type: value.type, position: value.position, label: value.label, icon: value.icon});
+        exportData.push({type: value.type, position: value.position, label: value.label});
     });
     var exportTitle = $('#export-title').val();
     var exportDescription = $('#export-description').val();
@@ -159,10 +171,10 @@ function importMarkers( importData )
     $.each(importData.markers, function (key, value) {
         if (value.type == map.getMapTypeId())
         {
-            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), map, value.label, value.icon, value.type);
+            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), map, value.label, ImageDB.get(value.label), value.type);
         } else
         {
-            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), null, value.label, value.icon, value.type);
+            MapEditor.addMarker(new google.maps.LatLng(value.position.lat, value.position.lng), null, value.label, ImageDB.get(value.label), value.type);
         }
     });
     if( typeof importData.type != 'undefined' )
