@@ -18,3 +18,8 @@ body {
 {
     margin-top: 20px;
 }
+
+#toolsArea button
+{
+    margin: 10px 0;
+}

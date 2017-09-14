@@ -221,3 +221,16 @@ function heatMap()
         heatmap.setMap(map);
     }
 }
+
+function visibleMarkersExp()
+{
+    var total = 0;
+    for(var x in markersData)
+    {
+        if( markersData[x].type == map.getMapTypeId() )
+        {
+            total += parseInt( MonsterDB.get(markersData[x].label).exp );
+        }
+    }
+    alert(total);
+}
