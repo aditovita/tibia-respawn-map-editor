@@ -1,3 +1,0 @@
-importMarkers(
-{"name":"Hello World","description":"This is a simple test!","markers":[{"type":"Ground","position":{"lat":14.774882506516272,"lng":60.46875},"label":"Achad","icon":"data/monster_images/Achad.gif"},{"type":"Ground","position":{"lat":8.754794702435618,"lng":47.4609375},"label":"Achad","icon":"data/monster_images/Achad.gif"},{"type":"Ground","position":{"lat":26.115985925333536,"lng":42.890625},"label":"Achad","icon":"data/monster_images/Achad.gif"}],"zoom":3,"center":{"lat":14.6048471550539,"lng":46.93359375},"type":"Ground","pallete":["Achad"]}
-);
