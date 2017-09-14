@@ -117,7 +117,6 @@ $(document).ready(function () {
         });
     });
     $('.import-link').on('click', function (event) {
-        event.preventDefault();
         var script = document.createElement('script');
         script.src = $(this).attr('data-file');
         document.body.appendChild(script);
