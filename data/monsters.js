@@ -7197,7 +7197,7 @@ var monsters = [{
         "energy": "100",
         "earth": "0",
         "death": "100",
-        "image": null
+        "image": "Lizard_High_Guard.gif"
     }, {
         "name": "Lizard Legionnaire",
         "rank": null,
