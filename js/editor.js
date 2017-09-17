@@ -233,15 +233,56 @@ function heatMap()
     }
 }
 
-function visibleMarkersExp()
+function huntStats()
 {
-    var total = 0;
+    var totalVisibleXP = 0;
+    var totalVisibleHP = 0;
+    var countVisible = 0;
+    var totalVisibleLoot = 0;
+    var totalXP = 0;
+    var totalHP = 0;
+    var totalLoot = 0;
+    var count = 0;
     for(var x in markersData)
     {
-        if( markersData[x].type == map.getMapTypeId() )
+        var monster = MonsterDB.get(markersData[x].label);
+        if( typeof monster != 'undefined')
         {
-            total += parseInt( MonsterDB.get(markersData[x].label).exp );
+            count++;
+            if( monster.exp )
+                totalXP += parseInt( monster.exp );
+            if( monster.hp )
+                totalHP += parseInt( monster.hp );
+            if( monster.loot_value )
+                totalLoot += parseInt( monster.loot_value );
+            if( markersData[x].type == map.getMapTypeId() )
+            {
+                countVisible++;
+                if( monster.exp )
+                    totalVisibleXP += parseInt( monster.exp );
+                if( monster.hp )
+                    totalVisibleHP += parseInt( monster.hp );
+                if( monster.loot_value )
+                    totalVisibleLoot += parseInt( monster.loot_value );
+            }
         }
     }
-    alert(total);
+    var statsContent = '<h4>Visible Monsters Stats</h4>';
+    statsContent += '<p>Average XP/HP: ' + ( totalVisibleXP / totalVisibleHP ) + '</p>';
+    statsContent += '<p>Average HP: ' + parseInt( totalVisibleHP / countVisible ) + '</p>';
+    statsContent += '<p>Average XP: ' + parseInt( totalVisibleXP / countVisible ) + '</p>';
+    statsContent += '<p>Average Loot: ' + parseInt( totalVisibleLoot / countVisible ) + '</p>';
+    statsContent += '<p>Total XP: ' + parseInt( totalVisibleXP ) + '</p>';
+    statsContent += '<p>Total HP: ' + parseInt( totalVisibleHP ) + '</p>';
+    statsContent += '<p>Total Loot: ' + ( totalVisibleLoot ) + '</p>';
+    statsContent += '<h4>All Monsters Stats</h4>';
+    statsContent += '<p>Average XP/HP: ' + ( totalXP / totalHP ) + '</p>';
+    statsContent += '<p>Average HP: ' + parseInt( totalHP / count ) + '</p>';
+    statsContent += '<p>Average XP: ' + parseInt( totalXP / count ) + '</p>';
+    statsContent += '<p>Average Loot: ' + parseInt( totalLoot / count ) + '</p>';
+    statsContent += '<p>Total XP: ' + parseInt( totalXP ) + '</p>';
+    statsContent += '<p>Total HP: ' + parseInt( totalHP ) + '</p>';
+    statsContent += '<p>Total Loot: ' + ( totalLoot ) + '</p>';
+    $('#map-modal .modal-body').html( statsContent );
+    $('#map-modal').modal('show');
 }
