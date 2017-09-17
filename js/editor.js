@@ -275,6 +275,14 @@ function huntStats()
     statsContent += '<p>Total XP: ' + parseInt( visibleStats['exp'] ) + '</p>';
     statsContent += '<p>Total HP: ' + parseInt( visibleStats['hp'] ) + '</p>';
     statsContent += '<p>Total Loot: ' + ( visibleStats['loot_value'] ) + '</p>';
+    statsContent += '<p>Average physical resist: ' + parseInt( visibleStats['physical'] / countVisible ) + '</p>';
+    statsContent += '<p>Average holy resist: ' + parseInt( visibleStats['holy'] / countVisible ) + '</p>';
+    statsContent += '<p>Average fire resist: ' + parseInt( visibleStats['fire'] / countVisible ) + '</p>';
+    statsContent += '<p>Average ice resist: ' + parseInt( visibleStats['ice'] / countVisible ) + '</p>';
+    statsContent += '<p>Average energy resist: ' + parseInt( visibleStats['energy'] / countVisible ) + '</p>';
+    statsContent += '<p>Average earth resist: ' + parseInt( visibleStats['earth'] / countVisible ) + '</p>';
+    statsContent += '<p>Average death resist: ' + parseInt( visibleStats['death'] / countVisible ) + '</p>';
+
     statsContent += '<h4>All Monsters Stats</h4>';
     statsContent += '<p>Average XP/HP: ' + ( allStats['exp'] / allStats['hp'] ) + '</p>';
     statsContent += '<p>Average HP: ' + parseInt( allStats['hp'] / count ) + '</p>';
@@ -283,6 +291,13 @@ function huntStats()
     statsContent += '<p>Total XP: ' + parseInt( allStats['exp'] ) + '</p>';
     statsContent += '<p>Total HP: ' + parseInt( allStats['hp'] ) + '</p>';
     statsContent += '<p>Total Loot: ' + ( allStats['loot_value'] ) + '</p>';
+    statsContent += '<p>Average physical resist: ' + parseInt( allStats['physical'] / count ) + '</p>';
+    statsContent += '<p>Average holy resist: ' + parseInt( allStats['holy'] / count ) + '</p>';
+    statsContent += '<p>Average fire resist: ' + parseInt( allStats['fire'] / count ) + '</p>';
+    statsContent += '<p>Average ice resist: ' + parseInt( allStats['ice'] / count ) + '</p>';
+    statsContent += '<p>Average energy resist: ' + parseInt( allStats['energy'] / count ) + '</p>';
+    statsContent += '<p>Average earth resist: ' + parseInt( allStats['earth'] / count ) + '</p>';
+    statsContent += '<p>Average death resist: ' + parseInt( allStats['death'] / count ) + '</p>';
     $('#map-modal .modal-body').html( statsContent );
     $('#map-modal').modal('show');
 }
