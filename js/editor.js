@@ -267,7 +267,7 @@ function huntStats()
         }
     }
     console.log(countVisible);
-    var statsContent = '<h4>Visible Monsters Stats</h4>';
+    var statsContent = '<div class="row"><div class="col-sm-6"><h4>Visible Monsters Stats</h4>';
     statsContent += '<p>Average XP/HP: ' + ( visibleStats['exp'] / visibleStats['hp'] ) + '</p>';
     statsContent += '<p>Average HP: ' + parseInt( visibleStats['hp'] / countVisible ) + '</p>';
     statsContent += '<p>Average XP: ' + parseInt( visibleStats['exp'] / countVisible ) + '</p>';
@@ -283,7 +283,7 @@ function huntStats()
     statsContent += '<p>Average earth resist: ' + parseInt( visibleStats['earth'] / countVisible ) + '</p>';
     statsContent += '<p>Average death resist: ' + parseInt( visibleStats['death'] / countVisible ) + '</p>';
 
-    statsContent += '<h4>All Monsters Stats</h4>';
+    statsContent += '</div><div class="col-sm-6"><h4>All Monsters Stats</h4>';
     statsContent += '<p>Average XP/HP: ' + ( allStats['exp'] / allStats['hp'] ) + '</p>';
     statsContent += '<p>Average HP: ' + parseInt( allStats['hp'] / count ) + '</p>';
     statsContent += '<p>Average XP: ' + parseInt( allStats['exp'] / count ) + '</p>';
@@ -297,7 +297,7 @@ function huntStats()
     statsContent += '<p>Average ice resist: ' + parseInt( allStats['ice'] / count ) + '</p>';
     statsContent += '<p>Average energy resist: ' + parseInt( allStats['energy'] / count ) + '</p>';
     statsContent += '<p>Average earth resist: ' + parseInt( allStats['earth'] / count ) + '</p>';
-    statsContent += '<p>Average death resist: ' + parseInt( allStats['death'] / count ) + '</p>';
+    statsContent += '<p>Average death resist: ' + parseInt( allStats['death'] / count ) + '</p></div></div>';
     $('#map-modal .modal-body').html( statsContent );
     $('#map-modal').modal('show');
 }
