@@ -236,6 +236,8 @@ function initMap() {
         {
             if( mapRectangle == false )
             {
+                $( '.pallete-draw-rectangle' ).addClass('hidden');
+                $( '.pallete-remove-rectangle' ).removeClass('hidden');
                 var bounds = {
                     north: event.latLng.lat()+10/map.getZoom(),
                     south: event.latLng.lat()-10/map.getZoom(),

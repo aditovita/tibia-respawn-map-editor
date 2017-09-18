@@ -133,8 +133,6 @@ $(document).ready(function () {
             $('.pallete-selected').html($(this).attr('data-name'));
             $('.pallete-selected').attr('data-name', $(this).attr('data-name'));
             $('.pallete-selected').attr('data-image', '');
-            $(this).addClass('hidden');
-            $( '.pallete-remove-rectangle' ).removeClass('hidden');
         });
     $( '.pallete-remove-rectangle' ).on('click', function (event) {
             MapPallete.selected = false;
