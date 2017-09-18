@@ -276,13 +276,9 @@ function heatMap()
 
 function huntStats()
 {
-    var totalVisibleXP = 0;
-    var totalVisibleHP = 0;
+    var visibleStats = new Array();
+    var allStats = new Array();
     var countVisible = 0;
-    var totalVisibleLoot = 0;
-    var totalXP = 0;
-    var totalHP = 0;
-    var totalLoot = 0;
     var count = 0;
     for(var x in markersData)
     {
@@ -290,40 +286,59 @@ function huntStats()
         if( typeof monster != 'undefined')
         {
             count++;
-            if( monster.exp )
-                totalXP += parseInt( monster.exp );
-            if( monster.hp )
-                totalHP += parseInt( monster.hp );
-            if( monster.loot_value )
-                totalLoot += parseInt( monster.loot_value );
-            if( markersData[x].type == map.getMapTypeId() )
+            for(var stat in monster)
             {
-                countVisible++;
-                if( monster.exp )
-                    totalVisibleXP += parseInt( monster.exp );
-                if( monster.hp )
-                    totalVisibleHP += parseInt( monster.hp );
-                if( monster.loot_value )
-                    totalVisibleLoot += parseInt( monster.loot_value );
+                if( !isNaN( monster[stat] ) )
+                {
+                    console.log(monster[stat] );
+                    if( typeof allStats[stat] == 'undefined' )
+                    {
+                        allStats[stat] = 0;
+                        visibleStats[stat] = 0;
+                    }
+                    allStats[stat] += parseInt( monster[stat] );
+                    if( markersData[x].type == map.getMapTypeId() )
+                    {
+                        visibleStats[stat] += parseInt( monster[stat] );
+                    }
+                }
             }
+            if( markersData[x].type == map.getMapTypeId() )
+                countVisible++;
         }
     }
-    var statsContent = '<h4>Visible Monsters Stats</h4>';
-    statsContent += '<p>Average XP/HP: ' + ( totalVisibleXP / totalVisibleHP ) + '</p>';
-    statsContent += '<p>Average HP: ' + parseInt( totalVisibleHP / countVisible ) + '</p>';
-    statsContent += '<p>Average XP: ' + parseInt( totalVisibleXP / countVisible ) + '</p>';
-    statsContent += '<p>Average Loot: ' + parseInt( totalVisibleLoot / countVisible ) + '</p>';
-    statsContent += '<p>Total XP: ' + parseInt( totalVisibleXP ) + '</p>';
-    statsContent += '<p>Total HP: ' + parseInt( totalVisibleHP ) + '</p>';
-    statsContent += '<p>Total Loot: ' + ( totalVisibleLoot ) + '</p>';
-    statsContent += '<h4>All Monsters Stats</h4>';
-    statsContent += '<p>Average XP/HP: ' + ( totalXP / totalHP ) + '</p>';
-    statsContent += '<p>Average HP: ' + parseInt( totalHP / count ) + '</p>';
-    statsContent += '<p>Average XP: ' + parseInt( totalXP / count ) + '</p>';
-    statsContent += '<p>Average Loot: ' + parseInt( totalLoot / count ) + '</p>';
-    statsContent += '<p>Total XP: ' + parseInt( totalXP ) + '</p>';
-    statsContent += '<p>Total HP: ' + parseInt( totalHP ) + '</p>';
-    statsContent += '<p>Total Loot: ' + ( totalLoot ) + '</p>';
+    console.log(countVisible);
+    var statsContent = '<div class="row"><div class="col-sm-6"><h4>Visible Monsters Stats</h4>';
+    statsContent += '<p>Average XP/HP: ' + ( visibleStats['exp'] / visibleStats['hp'] ) + '</p>';
+    statsContent += '<p>Average HP: ' + parseInt( visibleStats['hp'] / countVisible ) + '</p>';
+    statsContent += '<p>Average XP: ' + parseInt( visibleStats['exp'] / countVisible ) + '</p>';
+    statsContent += '<p>Average Loot: ' + parseInt( visibleStats['loot_value'] / countVisible ) + '</p>';
+    statsContent += '<p>Total XP: ' + parseInt( visibleStats['exp'] ) + '</p>';
+    statsContent += '<p>Total HP: ' + parseInt( visibleStats['hp'] ) + '</p>';
+    statsContent += '<p>Total Loot: ' + ( visibleStats['loot_value'] ) + '</p>';
+    statsContent += '<p>Average physical resist: ' + parseInt( visibleStats['physical'] / countVisible ) + '</p>';
+    statsContent += '<p>Average holy resist: ' + parseInt( visibleStats['holy'] / countVisible ) + '</p>';
+    statsContent += '<p>Average fire resist: ' + parseInt( visibleStats['fire'] / countVisible ) + '</p>';
+    statsContent += '<p>Average ice resist: ' + parseInt( visibleStats['ice'] / countVisible ) + '</p>';
+    statsContent += '<p>Average energy resist: ' + parseInt( visibleStats['energy'] / countVisible ) + '</p>';
+    statsContent += '<p>Average earth resist: ' + parseInt( visibleStats['earth'] / countVisible ) + '</p>';
+    statsContent += '<p>Average death resist: ' + parseInt( visibleStats['death'] / countVisible ) + '</p>';
+
+    statsContent += '</div><div class="col-sm-6"><h4>All Monsters Stats</h4>';
+    statsContent += '<p>Average XP/HP: ' + ( allStats['exp'] / allStats['hp'] ) + '</p>';
+    statsContent += '<p>Average HP: ' + parseInt( allStats['hp'] / count ) + '</p>';
+    statsContent += '<p>Average XP: ' + parseInt( allStats['exp'] / count ) + '</p>';
+    statsContent += '<p>Average Loot: ' + parseInt( allStats['loot_value'] / count ) + '</p>';
+    statsContent += '<p>Total XP: ' + parseInt( allStats['exp'] ) + '</p>';
+    statsContent += '<p>Total HP: ' + parseInt( allStats['hp'] ) + '</p>';
+    statsContent += '<p>Total Loot: ' + ( allStats['loot_value'] ) + '</p>';
+    statsContent += '<p>Average physical resist: ' + parseInt( allStats['physical'] / count ) + '</p>';
+    statsContent += '<p>Average holy resist: ' + parseInt( allStats['holy'] / count ) + '</p>';
+    statsContent += '<p>Average fire resist: ' + parseInt( allStats['fire'] / count ) + '</p>';
+    statsContent += '<p>Average ice resist: ' + parseInt( allStats['ice'] / count ) + '</p>';
+    statsContent += '<p>Average energy resist: ' + parseInt( allStats['energy'] / count ) + '</p>';
+    statsContent += '<p>Average earth resist: ' + parseInt( allStats['earth'] / count ) + '</p>';
+    statsContent += '<p>Average death resist: ' + parseInt( allStats['death'] / count ) + '</p></div></div>';
     $('#map-modal .modal-body').html( statsContent );
     $('#map-modal').modal('show');
 }

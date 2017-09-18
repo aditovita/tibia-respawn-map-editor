@@ -8173,7 +8173,7 @@ var monsters = [{
         "energy": "100",
         "earth": "100",
         "death": "100",
-        "image": null
+        "image": "Minotaur_Hunter.gif"
     }, {
         "name": "Minotaur Invader",
         "rank": null,
