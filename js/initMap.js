@@ -1,4 +1,5 @@
 var map = false;
+var mapRectangle = false;
 var markersData = [];
 function getMapFolder()
 {
@@ -229,8 +230,26 @@ function initMap() {
     map.mapTypes.set('+7', g7MapType);
     map.setMapTypeId('Ground');
     google.maps.event.addListener(map, 'click', function (event) {
-        if(MapPallete.selected !== false )
+        if(MapPallete.selected !== false && typeof MonsterDB.get(MapPallete.selected.name) != 'undefined' )
             MapEditor.addMarker(event.latLng, map);
+        else if( MapPallete.selected !== false && MapPallete.selected.name == 'Draw Rectangle')
+        {
+            if( mapRectangle == false )
+            {
+                var bounds = {
+                    north: event.latLng.lat()+10/map.getZoom(),
+                    south: event.latLng.lat()-10/map.getZoom(),
+                    east: event.latLng.lng()+10/map.getZoom(),
+                    west: event.latLng.lng()-10/map.getZoom()
+                };
+                mapRectangle = new google.maps.Rectangle({
+                    bounds: bounds,
+                    editable: true,
+                    draggable: true
+                });
+                mapRectangle.setMap(map);
+            }
+        }
     });
 }
 

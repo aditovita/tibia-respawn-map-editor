@@ -128,6 +128,47 @@ $(document).ready(function () {
             $(this).find('img').clone().appendTo(".pallete-selected");
         });
     });
+    $( '.pallete-draw-rectangle' ).on('click', function (event) {
+            MapPallete.selected = {name: $(this).attr('data-name')};
+            $('.pallete-selected').html($(this).attr('data-name'));
+            $('.pallete-selected').attr('data-name', $(this).attr('data-name'));
+            $('.pallete-selected').attr('data-image', '');
+            $(this).addClass('hidden');
+            $( '.pallete-remove-rectangle' ).removeClass('hidden');
+        });
+    $( '.pallete-remove-rectangle' ).on('click', function (event) {
+            MapPallete.selected = false;
+            $('.pallete-selected').html();
+            $('.pallete-selected').attr('data-name', '');
+            $('.pallete-selected').attr('data-image', '');
+            $(this).addClass('hidden');
+            $( '.pallete-draw-rectangle' ).removeClass('hidden');
+            if( mapRectangle != false )
+            {
+                mapRectangle.setMap(null);
+            }
+            mapRectangle = false;
+        });
+    $( '.pallete-remove-selected-markers' ).on('click', function (event) {
+            if( mapRectangle != false )
+            {
+                var ne = mapRectangle.getBounds().getNorthEast();
+                var sw = mapRectangle.getBounds().getSouthWest();
+                for (var x = markersData.length - 1; x >= 0; x--)
+                {
+                    if( markersData[x].type == map.getMapTypeId() 
+                            && markersData[x].position.lat < ne.lat()
+                            && markersData[x].position.lng < ne.lng()
+                            && markersData[x].position.lat > sw.lat()
+                            && markersData[x].position.lng > sw.lng()
+                            )
+                    {
+                        markersData[x].object.setMap(null);
+                        markersData.splice(x, 1);
+                    }
+                }
+            }
+        });
     $('.import-link').on('click', function (event) {
         var script = document.createElement('script');
         script.src = $(this).attr('data-file');
