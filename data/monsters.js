@@ -641,7 +641,7 @@ var monsters = [{
     }, {
         "name": "Barkless Devotee",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "2200",
         "hp": "2800",
         "max_damage": "0",
@@ -657,7 +657,7 @@ var monsters = [{
     }, {
         "name": "Barkless Fanatic",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "2500",
         "hp": "3200",
         "max_damage": "0",
@@ -1137,7 +1137,7 @@ var monsters = [{
     }, {
         "name": "Boogy",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "950",
         "hp": "1300",
         "max_damage": "0",
@@ -4289,7 +4289,7 @@ var monsters = [{
     }, {
         "name": "Faun",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "800",
         "hp": "900",
         "max_damage": "0",
@@ -8481,7 +8481,7 @@ var monsters = [{
     }, {
         "name": "Misguided Bully",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "1200",
         "hp": "2000",
         "max_damage": "500",
@@ -8497,7 +8497,7 @@ var monsters = [{
     }, {
         "name": "Misguided Thief",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "1200",
         "hp": "1800",
         "max_damage": "500",
@@ -9185,7 +9185,7 @@ var monsters = [{
     }, {
         "name": "Nymph",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "850",
         "hp": "900",
         "max_damage": "135",
@@ -9873,7 +9873,7 @@ var monsters = [{
     }, {
         "name": "Pixie",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "700",
         "hp": "770",
         "max_damage": "0",
@@ -10001,7 +10001,7 @@ var monsters = [{
     }, {
         "name": "Pooka",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "500",
         "hp": "500",
         "max_damage": "0",
@@ -12305,7 +12305,7 @@ var monsters = [{
     }, {
         "name": "Swan Maiden",
         "rank": null,
-        "senses_invis": "&#10003;",
+        "senses_invis": "y;",
         "exp": "700",
         "hp": "800",
         "max_damage": "0",
