@@ -167,6 +167,26 @@ $(document).ready(function () {
                 }
             }
         });
+    $( '.pallete-remove-non-selected-markers' ).on('click', function (event) {
+            if( mapRectangle != false )
+            {
+                var ne = mapRectangle.getBounds().getNorthEast();
+                var sw = mapRectangle.getBounds().getSouthWest();
+                for (var x = markersData.length - 1; x >= 0; x--)
+                {
+                    if( markersData[x].type == map.getMapTypeId() 
+                            && !( markersData[x].position.lat < ne.lat()
+                            && markersData[x].position.lng < ne.lng()
+                            && markersData[x].position.lat > sw.lat()
+                            && markersData[x].position.lng > sw.lng() )
+                            )
+                    {
+                        markersData[x].object.setMap(null);
+                        markersData.splice(x, 1);
+                    }
+                }
+            }
+        });
     $('.import-link').on('click', function (event) {
         var script = document.createElement('script');
         script.src = $(this).attr('data-file');
