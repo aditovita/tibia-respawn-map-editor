@@ -8339,7 +8339,7 @@ var monsters = [{
         "rank": null,
         "senses_invis": "?",
         "exp": "1100",
-        "hp": "0",
+        "hp": "1600",
         "max_damage": "0",
         "loot_value": "801",
         "physical": "100",
