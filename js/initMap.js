@@ -73,7 +73,7 @@ function getTileURL(coord, zoom) {
             markersData[key].object.setMap(null);
         }
     });
-    return 'data/maptiles/' + getMapFolder() + '/' + zoom + '/' + normalizedCoord.x + '/' + (bound - normalizedCoord.y - 1) + '.png';
+    return 'https://raw.githubusercontent.com/aditovita/tibia-respawn-map-data/master/data/maptiles/' + getMapFolder() + '/' + zoom + '/' + normalizedCoord.x + '/' + (bound - normalizedCoord.y - 1) + '.png';
 }
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {

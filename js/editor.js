@@ -19,7 +19,7 @@ var MonsterDB = {
 			{
 				monsters[x].image = '14px-Cross3.jpg';
 			}
-			monsters[x].image = 'data/monster_images/' + monsters[x].image;
+			monsters[x].image = 'https://raw.githubusercontent.com/aditovita/tibia-respawn-map-monster-images/master/data/monster_images/' + monsters[x].image;
 			this.monsters[monsters[x].name] = monsters[x];
 		}
 	},
