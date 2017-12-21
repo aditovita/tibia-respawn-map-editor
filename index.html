@@ -79,6 +79,13 @@
                                     <textarea id="export-description" class="form-control"></textarea>
                                     <button onclick="exportMarkers();" class="form-control export-button">Export</button>
                                     <textarea class="export-result form-control hidden"></textarea>
+                                    <h4>Submit</h4>
+                                    <div id="captcha_area">
+                                        <p><img id="captcha" src="http://tibiavis.com/captcha.php" /></p>
+                                        <p><input type="text" size="6" maxlength="5" name="captcha" value=""><br>
+                                        <small>copy the digits from the image into this box</small></p>
+                                        <button onclick="submitData();" class="form-control export-button">Submit</button>
+                                    </div>
                                 </div>
                             </div>
                         </div>

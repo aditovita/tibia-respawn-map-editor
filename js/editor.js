@@ -218,6 +218,27 @@ function exportMarkers()
     $('.export-result').val(JSON.stringify(exportResult));
     $('.export-result').removeClass('hidden');
 }
+function submitData()
+{
+    exportMarkers();
+    $('#captcha').hide();
+    $.ajax({
+        type: 'GET',
+        url: 'http://tibiavis.com/submit.php?_=' + new Date().getTime(),
+        dataType: "json",
+        data: { captcha: $('input[name="captcha"]').val(), name: $('#export-title').val(), description: $('#export-description').val(), data: $('.export-result').val() },
+        success: function (data) {
+            if(data == '1')
+            {
+               $('#captcha_area').html('Success! Please wait for the admin review to add this item to the hunting list!');
+            }
+            else
+            {
+                $('#captcha').attr('src', 'http://tibiavis.com/captcha.php?_=' + new Date().getTime() ).show();
+            }
+        }
+    });
+}
 function importMarkers( importData )
 {
     if(typeof importData == 'undefined')
