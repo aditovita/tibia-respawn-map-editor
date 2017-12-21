@@ -296,6 +296,8 @@ function huntStats()
 {
     var visibleStats = new Array();
     var allStats = new Array();
+    visibleStats['monsters'] = new Array();
+    allStats['monsters'] = new Array();
     var countVisible = 0;
     var count = 0;
     for(var x in markersData)
@@ -304,6 +306,17 @@ function huntStats()
         if( typeof monster != 'undefined')
         {
             count++;
+            if( typeof allStats['monsters'][markersData[x].label] == 'undefined' )
+            {
+
+                visibleStats['monsters'][markersData[x].label] = 0;
+                allStats['monsters'][markersData[x].label] = 0;
+            }
+            if( markersData[x].type == map.getMapTypeId() )
+            {
+                visibleStats['monsters'][markersData[x].label]++;
+            }
+            allStats['monsters'][markersData[x].label]++;
             for(var stat in monster)
             {
                 if( !isNaN( monster[stat] ) )
@@ -341,6 +354,11 @@ function huntStats()
     statsContent += '<p>Average energy resist: ' + parseInt( visibleStats['energy'] / countVisible ) + '</p>';
     statsContent += '<p>Average earth resist: ' + parseInt( visibleStats['earth'] / countVisible ) + '</p>';
     statsContent += '<p>Average death resist: ' + parseInt( visibleStats['death'] / countVisible ) + '</p>';
+    statsContent += '<h3>Monsters</h3>';
+    for(var name in visibleStats['monsters'])
+    {
+        statsContent += '<p>' + name + ': ' + visibleStats['monsters'][name] + '</p>';
+    }
 
     statsContent += '</div><div class="col-sm-6"><h4>All Monsters Stats</h4>';
     statsContent += '<p>Average XP/HP: ' + ( allStats['exp'] / allStats['hp'] ) + '</p>';
@@ -356,7 +374,13 @@ function huntStats()
     statsContent += '<p>Average ice resist: ' + parseInt( allStats['ice'] / count ) + '</p>';
     statsContent += '<p>Average energy resist: ' + parseInt( allStats['energy'] / count ) + '</p>';
     statsContent += '<p>Average earth resist: ' + parseInt( allStats['earth'] / count ) + '</p>';
-    statsContent += '<p>Average death resist: ' + parseInt( allStats['death'] / count ) + '</p></div></div>';
+    statsContent += '<p>Average death resist: ' + parseInt( allStats['death'] / count ) + '</p>';
+    statsContent += '<h3>Monsters</h3>';
+    for(var name in allStats['monsters'])
+    {
+        statsContent += '<p>' + name + ': ' + allStats['monsters'][name] + '</p>';
+    }
+    statsContent += '</div></div>';
     $('#map-modal .modal-body').html( statsContent );
     $('#map-modal').modal('show');
 }
