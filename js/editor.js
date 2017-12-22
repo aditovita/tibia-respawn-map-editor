@@ -223,7 +223,7 @@ function submitData()
     exportMarkers();
     $('#captcha').hide();
     $.ajax({
-        type: 'GET',
+        type: 'POST',
         url: 'http://tibiavis.com/submit.php?_=' + new Date().getTime(),
         dataType: "json",
         data: { captcha: $('input[name="captcha"]').val(), name: $('#export-title').val(), description: $('#export-description').val(), data: $('.export-result').val() },

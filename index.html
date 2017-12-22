@@ -67,6 +67,23 @@
                         <div class="panel panel-default">
                             <div class="panel-heading" role="tab">
                                 <h4 class="panel-title">
+                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#importArea">
+                                        Import
+                                    </a>
+                                </h4>
+                            </div>
+                            <div id="importArea" class="panel-collapse collapse in" role="tabpanel">
+                                <div class="panel-body">
+                                    <div class="form-group">
+                                        <textarea id="import-data" class="form-control"></textarea>
+                                        <button onclick="importMarkers();" class="form-control import-button">Import</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel panel-default">
+                            <div class="panel-heading" role="tab">
+                                <h4 class="panel-title">
                                     <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#exportArea">
                                         Export
                                     </a>
@@ -85,23 +102,6 @@
                                         <p><input type="text" size="6" maxlength="5" name="captcha" value=""><br>
                                         <small>copy the digits from the image into this box</small></p>
                                         <button onclick="submitData();" class="form-control export-button">Submit</button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="panel panel-default">
-                            <div class="panel-heading" role="tab">
-                                <h4 class="panel-title">
-                                    <a class="collapsed" role="button" data-toggle="collapse" data-parent="#accordion" href="#importArea">
-                                        Import
-                                    </a>
-                                </h4>
-                            </div>
-                            <div id="importArea" class="panel-collapse collapse in" role="tabpanel">
-                                <div class="panel-body">
-                                    <div class="form-group">
-                                        <textarea id="import-data" class="form-control"></textarea>
-                                        <button onclick="importMarkers();" class="form-control import-button">Import</button>
                                     </div>
                                 </div>
                             </div>
